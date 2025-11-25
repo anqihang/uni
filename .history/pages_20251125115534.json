@@ -1,0 +1,27 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"subPackages": [],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "cool-uni",
+		"navigationBarTextStyle": "black"
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "cool-uni",
+		"navigationBarBackgroundColor": "#ffffff",
+		"backgroundColor": "#f6f7fa",
+		"usingComponents": {
+			"t-tabs": "/wxcomponents/miniprogram_dist/tabs/tabs",
+			"t-tab-panel": "/wxcomponents/miniprogram_dist/tab-panel/tab-panel"
+		}
+	}
+}
