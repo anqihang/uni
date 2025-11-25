@@ -9,10 +9,9 @@
 				:defaultValue="0"
 				class="thms-flex-1 thms-flex thms-flex-col thms-oveflow-hidden"
 				t-class-content="h-full"
-				:space-evenly="false"
 			>
 				<t-tab-panel
-					:label="tab.title"
+					label="选项"
 					:value="index"
 					v-for="(tab, index) in tabList"
 					:key="index"
@@ -41,12 +40,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import navBar from "/@/components/nav-bar.vue";
 import { router } from "/@/cool";
 import { getTabBarList } from "/@/cool/api";
-import { useGlobalStore } from "/@/cool/store/global";
-const globalStore = useGlobalStore();
 const props = defineProps({
 	cur: {
 		type: Number,
@@ -54,21 +51,16 @@ const props = defineProps({
 	},
 });
 onMounted(() => {});
-// const tabList = reactive([
-// 	// {
-// 	// 	label: "数码",
-// 	// 	list: [{ id: 0, name: "1", type: 0 }],
-// 	// },
-// 	// {
-// 	// 	label: "服装",
-// 	// 	list: [{ id: 0, name: "1", type: 0 }],
-// 	// },
-// ]);
-const tabList = computed(() => {
-	return globalStore.tabBarList
-		?.find((i) => i.pageType == 1)
-		?.pageConfigs?.map((i) => ({ title: i.baseTitle, sort: i.baseSort, pageId: i.pageId }));
-});
+const tabList = reactive([
+	// {
+	// 	label: "数码",
+	// 	list: [{ id: 0, name: "1", type: 0 }],
+	// },
+	// {
+	// 	label: "服装",
+	// 	list: [{ id: 0, name: "1", type: 0 }],
+	// },
+]);
 const active = ref("");
 function toDetail(item) {
 	console.log("跳转");

@@ -130,36 +130,3 @@ export function getTabBarList() {
 		console.log(globalStore.tabBarList, "tabBarList");
 	});
 }
-export function getVideoList(page, title, type) {
-	return get("/video/index", {
-		pageNum: page,
-		appid: useGlobalStore().appId,
-		title: title,
-		reasonable: false,
-		pageSize: 10,
-	});
-}
-//视频列表
-export const videoList = (data) => {
-	let _data = {
-		pageNum: data.page,
-		// pageSize: 10,
-		appid: data.appId || "",
-		title: data.title || "",
-		reasonable: false,
-		pageSize: data.pageSize || 10,
-	};
-	// if (!data.title && data.type) {
-	// _data.videoType = data.type;
-	// }
-	return new Promise((resolve, reject) => {
-		// uni.showLoading({
-		// 	title: '数据加载中',
-		// 	icon: 'loading',
-		// 	mask: true
-		// });
-		get("/video/index", _data).then((res) => {
-			resolve(res.data);
-		});
-	});
-};
