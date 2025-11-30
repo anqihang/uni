@@ -162,51 +162,6 @@
 									</view>
 								</view>
 							</view>
-							<view class="" style="width: 100%; margin-bottom: 10rpx">
-								<ad
-									v-if="
-										item.adv &&
-										item.adv?.typeAd == 0 &&
-										item.adv.status == 1 &&
-										item.adv.advId &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0 &&
-										item.adv.advertTypeId == 1
-									"
-									:unit-id="item.adv.advId"
-									@load="f_adLoad(item.list, index1, $event, 1)"
-									@error="f_adError(item.list, index1, $event, 1)"
-								></ad>
-								<!-- <ad
-									v-if="
-										item.adv &&
-										item.adv?.typeAd == 0 &&
-										item.adv.status == 1 &&
-										item.adv.advId &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0 &&
-										item.adv.advertTypeId == 3
-									"
-									ad-type="video"
-									ad-theme="white"
-									:unit-id="item.adv.advId"
-									@load="f_adLoad(item.list, index1, $event, 3)"
-									@error="f_adError(item.list, index1, $event, 3)"
-								></ad>
-								<coral-adv
-									v-if="
-										item.adv?.typeAd == 1 &&
-										item.adv?.status == 1 &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0
-									"
-									:appid="globalStore.adv.appid"
-									:type="item.adv.advertTypeId == '1' ? 1 : 10"
-								></coral-adv> -->
-							</view>
 						</view>
 						<ad
 							v-if="

@@ -37,7 +37,7 @@
 				"
 				:show="cur == 3"
 			></view>
-			<!-- <mine
+			<mine
 				v-show="cur == 4"
 				class="thms-top-0"
 				:class="
@@ -46,7 +46,7 @@
 						: 'thms-absolute thms-z-0 thms-opacity-0'
 				"
 				:show="cur == 4"
-			></mine> -->
+			></mine>
 		</view>
 		<tabBar v-model="cur" class="thms-relative thms-z-10"></tabBar>
 	</view>
@@ -56,8 +56,8 @@
 import { ref } from "vue";
 import tabBar from "/components/tab-bar.vue";
 import home from "./home.vue";
-// import home1 from "./home1.vue";
-// import mine from "./mine.vue";
+import home1 from "./home1.vue";
+import mine from "./mine.vue";
 const cur = ref(0);
 </script>
 

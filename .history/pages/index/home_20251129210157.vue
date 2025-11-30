@@ -21,38 +21,6 @@
 					custom-style="height: 100%"
 				>
 					<scroll-view scroll-y class="thms-h-full" @scrolltolower="loadmore">
-						<view class="" style="width: 100%">
-							<!-- <ad unit-id="adunit-8de70fb1883bcfc5"></ad> -->
-							<ad
-								ref="adRef"
-								v-if="
-									globalStore.adv.top_global.typeAd == 0 &&
-									globalStore.adv.top_global.status == 1 &&
-									globalStore.adv.top_global.advId &&
-									globalStore.adv.top_global.type == 3
-								"
-								ad-type="video"
-								ad-theme="white"
-								:unit-id="globalStore.adv.top_global.advId"
-							>
-							</ad>
-							<ad
-								ref="adRef"
-								v-if="
-									globalStore.adv.top_global.typeAd == 0 &&
-									globalStore.adv.top_global.status == 1 &&
-									globalStore.adv.top_global.advId &&
-									globalStore.adv.top_global.type == 1
-								"
-								:unit-id="globalStore.adv.top_global.advId"
-							></ad>
-
-							<coral-adv
-								v-if="globalStore.adv.top_global.typeAd == 1"
-								:appid="globalStore.adv.appid"
-								:type="globalStore.adv.top_global.type == 1 ? 1 : 10"
-							></coral-adv>
-						</view>
 						<view
 							v-for="(item, index) in tab.list"
 							:key="index"
@@ -162,80 +130,7 @@
 									</view>
 								</view>
 							</view>
-							<view class="" style="width: 100%; margin-bottom: 10rpx">
-								<ad
-									v-if="
-										item.adv &&
-										item.adv?.typeAd == 0 &&
-										item.adv.status == 1 &&
-										item.adv.advId &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0 &&
-										item.adv.advertTypeId == 1
-									"
-									:unit-id="item.adv.advId"
-									@load="f_adLoad(item.list, index1, $event, 1)"
-									@error="f_adError(item.list, index1, $event, 1)"
-								></ad>
-								<!-- <ad
-									v-if="
-										item.adv &&
-										item.adv?.typeAd == 0 &&
-										item.adv.status == 1 &&
-										item.adv.advId &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0 &&
-										item.adv.advertTypeId == 3
-									"
-									ad-type="video"
-									ad-theme="white"
-									:unit-id="item.adv.advId"
-									@load="f_adLoad(item.list, index1, $event, 3)"
-									@error="f_adError(item.list, index1, $event, 3)"
-								></ad>
-								<coral-adv
-									v-if="
-										item.adv?.typeAd == 1 &&
-										item.adv?.status == 1 &&
-										item.adv?.acticleCnt != 0 &&
-										index1 != 0 &&
-										(index1 + 1) % item.adv?.acticleCnt == 0
-									"
-									:appid="globalStore.adv.appid"
-									:type="item.adv.advertTypeId == '1' ? 1 : 10"
-								></coral-adv> -->
-							</view>
 						</view>
-						<ad
-							v-if="
-								globalStore.adv.bottom_global.status == 0 &&
-								globalStore.adv.bottom_global.status == 1 &&
-								globalStore.adv.bottom_global.advId &&
-								globalStore.adv.bottom_global.type == 3
-							"
-							ad-type="video"
-							ad-theme="white"
-							:unit-id="globalStore.adv.bottom_global.advId"
-						></ad>
-						<ad
-							v-if="
-								globalStore.adv.bottom_global.status == 0 &&
-								globalStore.adv.bottom_global.status == 1 &&
-								globalStore.adv.bottom_global.advId &&
-								globalStore.adv.bottom_global.type == 1
-							"
-							:unit-id="globalStore.adv.bottom_global.advId"
-						></ad>
-						<coral-adv
-							v-if="
-								globalStore.adv.bottom_global.typeAd == 1 &&
-								globalStore.adv.bottom_global.status == 1
-							"
-							:appid="globalStore.adv.appid"
-							:type="globalStore.adv.bottom_global.type == 1 ? 1 : 10"
-						></coral-adv>
 					</scroll-view>
 				</t-tab-panel>
 			</t-tabs>

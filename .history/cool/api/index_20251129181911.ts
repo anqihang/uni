@@ -1,7 +1,5 @@
-import { first } from "lodash-es";
 import { useGlobalStore } from "../store/global";
 import { get, post } from "./request";
-import { t } from "/@/locale";
 
 export function login() {
 	const globalStore = useGlobalStore();
@@ -37,38 +35,6 @@ export function login() {
 export function getAdv() {
 	const globalStore = useGlobalStore();
 	post("/getAdvConfig", { appId: globalStore.appId }).then((res: any) => {
-		let typea = "";
-		let typev = "";
-		let typeT = "";
-		let typeB = "";
-		res.advertPlaceConfigs.forEach((element) => {
-			if (element.title == "config_adv") {
-				globalStore.adv.config_a = {};
-				typea = element.advertTypeId;
-				// advType.value["artical"] = element;
-			}
-			if (element.title == "config_vid") {
-				globalStore.adv.config_vid = {};
-				typev = element.advertTypeId;
-				// advType.value["video"] = element;
-			}
-			if (element.title == "top_index") {
-				typeT = element.advertTypeId;
-				globalStore.adv.top_global = {
-					status: element.status,
-					every: element?.acticleCnt,
-					type: element.advertTypeId,
-				};
-			}
-			if (element.title == "bottom_index") {
-				typeB = element.advertTypeId;
-				globalStore.adv.bottom_global = {
-					status: element.status,
-					every: element?.acticleCnt,
-					type: element.advertTypeId,
-				};
-			}
-		});
 		res.advertTypes?.forEach((ele: any) => {
 			if (ele.type === 6) {
 				globalStore.adv.bottom.type = ele.typeAd;
@@ -115,23 +81,8 @@ export function getAdv() {
 					status: ele.status,
 				});
 			}
-			if (typea == ele.type) {
-				globalStore.adv.config_a.advId = ele.content?.trim();
-				globalStore.adv.config_a.typeAd = ele.typeAd;
-			}
-			if (typev == ele.type) {
-				globalStore.adv.config_v.advId = ele.content?.trim();
-				globalStore.adv.config_v.typeAd = ele.typeAd;
-			}
-			if (typeT == ele.type) {
-				globalStore.adv.top_global.advId = ele.content?.trim();
-				globalStore.adv.top_global.typeAd = ele.typeAd;
-			}
-			if (typeB == ele.type) {
-				globalStore.adv.bottom_global.advId = ele.content?.trim();
-				globalStore.adv.bottom_global.typeAd = ele.typeAd;
-			}
 		});
+
 		// 	if (element.type == 4) {
 		// 		if (advReward.value.typeAd == 0) {
 		// 			//todo
@@ -183,63 +134,32 @@ export function getVideoList(page, title, type) {
 	return get("/video/index", {
 		pageNum: page,
 		appid: useGlobalStore().appId,
-		// title: title,
+		title: title,
 		reasonable: false,
 		pageSize: 10,
-		videoType: type,
 	});
 }
-export function videoInfoHome(data) {
+//视频列表
+export const videoList = (data) => {
+	let _data = {
+		pageNum: data.page,
+		// pageSize: 10,
+		appid: data.appId || "",
+		title: data.title || "",
+		reasonable: false,
+		pageSize: data.pageSize || 10,
+	};
+	// if (!data.title && data.type) {
+	// _data.videoType = data.type;
+	// }
 	return new Promise((resolve, reject) => {
-		get("/video/typeShow", { id: data.id, typeId: data.cateId, first: data.first }).then(
-			(data) => {
-				resolve(data);
-			}
-		);
-	});
-}
-export function videoInfo(data) {
-	return new Promise((resolve, reject) => {
-		get("/video/show", {
-			id: data.id,
-			appid: useGlobalStore().appId,
-			first: data.first,
-		}).then((res) => {
+		// uni.showLoading({
+		// 	title: '数据加载中',
+		// 	icon: 'loading',
+		// 	mask: true
+		// });
+		get("/video/index", _data).then((res) => {
 			resolve(res.data);
 		});
 	});
-}
-// export const videoInfoHome = (data) => {
-// 	let _data = {
-// 		id: data.id,
-// 		typeId: data.cateId,
-// 	};
-// 	if (data.first) {
-// 		_data.first = data.first;
-// 	}
-// 	return new Promise((resolve, reject) => {
-// 		get("/video/typeShow", _data).then((res) => {
-// 			resolve(res.data);
-// 		});
-// 	});
-// };
-// //视频详情
-// export const videoInfo = (data) => {
-// 	let _data = {
-// 		id: data.id,
-// 		appId: data.appId,
-// 	};
-// 	if (data.first) {
-// 		_data.first = data.first;
-// 	}
-// 	return new Promise((resolve, reject) => {
-// 		// uni.showLoading({
-// 		// 	title: '数据加载中',
-// 		// 	icon: 'loading',
-// 		// 	mask: true
-// 		// });
-// 		get("/video/show", _data).then((res) => {
-// 			resolve(res.data);
-// 		});
-// 	});
-// };
+};

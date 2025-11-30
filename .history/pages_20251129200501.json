@@ -9,10 +9,10 @@
 	],
 	"subPackages": [
 		{
-			"root": "pages/video",
+			"root": "pages/register",
 			"pages": [
 				{
-					"path": "index",
+					"path": "doctor",
 					"style": {
 						"navigationStyle": "custom"
 					}
