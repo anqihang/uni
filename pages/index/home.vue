@@ -246,6 +246,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import navBar from "/@/components/nav-bar.vue";
+import { router } from "/@/cool";
 import { getTabBarList, getVideoList } from "/@/cool/api";
 import { useGlobalStore } from "/@/cool/store/global";
 const globalStore = useGlobalStore();
@@ -314,8 +315,40 @@ function getList() {
 			uni.hideLoading();
 		});
 }
-function loadmore() {
-	getList();
+
+const tabList = ref<any[]>([]);
+watch(
+	() => globalStore.tabBarList,
+	() => {
+		tabList.value = globalStore.tabBarList
+			?.find((i) => i.pageType == 1)
+			?.pageConfigs?.map((i: any) => ({
+				title: i.baseTitle,
+				sort: i.baseSort,
+				pageId: i.pageId,
+				page: 1,
+				type: i.baseType,
+				list: [],
+			}));
+		getList(tabList.value[0]);
+	}
+);
+function getList(tabItem: any) {
+	getVideoList({ page: tabItem.page, title: tabItem.title, type: tabItem.type })
+		.then((res) => {})
+		.then((data: any) => {
+			tabList.value.find((i: any) => i.id === tabItem.id)?.list?.push(...data);
+		});
+}
+function loadMore(tabItem: any) {
+	tabItem.page++;
+	getList(tabItem);
+}
+function toDetail(item) {
+	console.log("跳转");
+	router.push({
+		path: "/pages/register/doctor",
+	});
 }
 </script>
 

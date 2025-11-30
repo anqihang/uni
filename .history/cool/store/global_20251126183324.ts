@@ -6,8 +6,7 @@ export const useGlobalStore = defineStore("global", () => {
 	const openid = ref(uni.getStorageSync("openid"));
 	const appId = ref(uni.getAccountInfoSync().miniProgram.appId);
 	const share = ref({ shareTitle: "", shareImg: "" });
-	const adv = ref<any>({
-		appid: 121328,
+	const adv = ref({
 		bottom: {
 			type: 0,
 			id: "",
@@ -56,10 +55,6 @@ export const useGlobalStore = defineStore("global", () => {
 			intervalNum: "",
 			time: "",
 		},
-		top_global: {},
-		bottom_global: {},
-		config_v: {},
-		config_a: {},
 	});
 	const tabBarList = ref<any[]>([]);
 
