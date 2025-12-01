@@ -383,31 +383,18 @@ onLoad((options) => {
 });
 
 function getVideo(obj) {
-	const tabList = globalStore.tabBarList.find((i) => i.pageType == 1)?.pageConfigs;
-	const cateIndex = tabList.findIndex((i) => i.baseVideoType == cateId.value);
-
 	return new Promise((resolve) => {
 		if (from.value == "home") {
 			videoInfoHome({
 				id: obj.id,
 				cateId: cateId.value,
 			}).then((data) => {
-				if (cateIndex == tabList.length - 1 && data.nextId == 0) {
-					endId.value = data.xcxPage.videoId;
-				} else {
-					endId.value = 0;
-				}
 				resolve(data);
 			});
 		} else {
 			videoInfo({
 				id: obj.id,
 			}).then((data) => {
-				if (cateIndex == tabList.length - 1 && data.nextId == 0) {
-					endId.value = data.xcxPage.videoId;
-				} else {
-					endId.value = 0;
-				}
 				resolve(data);
 			});
 		}
@@ -418,11 +405,8 @@ const nextEnd = ref(false); // 到底
 
 const dir = ref("");
 const preIdList: number[] = [];
-//
-const count = ref(0);
-const endId = ref(0);
+
 function f_change(e) {
-	count.value++;
 	let cur = e.detail.current;
 	if ((cur > current.value && cur !== 4) || (current.value === 4 && cur === 0)) {
 		dir.value = "next";
@@ -437,7 +421,6 @@ function f_change(e) {
 	const tabList = globalStore.tabBarList.find((i) => i.pageType == 1)?.pageConfigs;
 	const cateIndex = tabList.findIndex((i) => i.baseVideoType == cateId.value);
 	console.log(cateIndex, "index");
-
 	if (dir.value === "next") {
 		const id = videoInfoList.value[(current.value + 1) % 5].nextId;
 		if (id == 0 && cateIndex < tabList.length) {
