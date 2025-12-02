@@ -96,7 +96,7 @@ export const useGlobalStore = defineStore("global", () => {
 		console.log("显示插屏广告");
 		// 进入立即显示
 		if (adv.value.insert.firstShow) {
-			console.log("进入立即显示");
+			console.log("进入立即显示", adv.value.insert);
 			adv.value.insert.timer = setTimeout(() => {
 				if (adv.value.insert.instance) {
 					adv.value.insert.instance
