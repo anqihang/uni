@@ -166,7 +166,7 @@
 										globalStore.adv.config_v.status == 1 &&
 										globalStore.adv.config_v?.acticleCnt != 0 &&
 										index != 0 &&
-										(index + 1) % globalStore.adv.config_v.articleCnt == 0 &&
+										(index + 1) % item.adv?.acticleCnt == 0 &&
 										globalStore.adv.config_v.advertTypeId == 1
 									"
 									:unit-id="item.adv.advId"
